@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/tasksFragment2"
+    android:title="To do list"
+    android:icon="@drawable/ic_baseline_list_24"
+    android:color="@color/holo_green_light"
+    />
+    <item android:id="@+id/doneFragment3"
+        android:title="Done"
+        android:icon="@drawable/ic_baseline_done_all_24"
+        />
+</menu>

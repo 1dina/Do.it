@@ -1,0 +1,57 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragTask"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/holo_gray_bright"
+    tools:context="fragmentsUi.TasksFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="end"
+        android:src="@drawable/ic_baseline_add_24"
+
+        app:backgroundTint="@color/holo_green_light"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tasks"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="Tasks"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mrecycleview"
+            android:layout_width="409dp"
+            android:layout_height="540dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
