@@ -27,7 +27,6 @@ import java.util.List;
 import com.example.doit.dataApp.TasksDao;
 import com.example.doit.dataApp.TasksDataBase;
 
-import fragmentsUi.DoneFragmentArgs;
 import com.example.doit.models.ToDoTasksModel;
 import com.example.doit.recycleViews.RecycleViewAdaptar;
 import com.example.doit.recycleViews.RecycleViewInterface;

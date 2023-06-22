@@ -18,10 +18,9 @@ import com.example.doit.R;
 import java.util.ArrayList;
 
 import com.example.doit.fragmentsUi.DoneFragment;
-import fragmentsUi.DoneFragmentDirections;
+import com.example.doit.fragmentsUi.DoneFragmentDirections;
 import com.example.doit.fragmentsUi.TasksFragment;
-import fragmentsUi.TasksFragmentArgs;
-import fragmentsUi.TasksFragmentDirections;
+import com.example.doit.fragmentsUi.TasksFragmentDirections;
 import com.example.doit.models.ToDoTasksModel;
 
 public class RecycleViewAdaptar extends  RecyclerView.Adapter<RecycleViewAdaptar.MyViewHolder> {
