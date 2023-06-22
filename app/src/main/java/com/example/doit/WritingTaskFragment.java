@@ -17,9 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import fragmentsUi.TasksFragmentDirections;
 
 
@@ -27,16 +24,12 @@ public class WritingTaskFragment extends Fragment {
     Button saveBtn;
     EditText edit1;
     String writtenText;
-    public interface onSomeEventListener {
-        public void someEvent(String s);
-    }
-
-    onSomeEventListener someEventListener;
     NavDirections action;
+    String TextToDo;
+    boolean taskFound;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_writing_task, container, false);
     }
 
@@ -46,6 +39,7 @@ public class WritingTaskFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         edit1 = view.findViewById(R.id.editText);
      saveBtn = view.findViewById(R.id.saveBtn);
+
 
         edit1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,12 +72,16 @@ public class WritingTaskFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               someEventListener.someEvent(edit1.getText().toString());
-                action = WritingTaskFragmentDirections.actionWritingTaskFragmentToTasksFragment2();
+                TextToDo = edit1.getText().toString();
+                if (!(TextToDo.equals(""))){
+                    ((MainActivity)getActivity()).setValue(true);
+                 action = WritingTaskFragmentDirections.actionWritingTaskFragmentToTasksFragment2(TextToDo);
                 Navigation.findNavController(view).navigate(action);
 
 
-            }
+
+
+            }}
         });
 
 
@@ -96,15 +94,6 @@ public class WritingTaskFragment extends Fragment {
 
     }
 
-    @Override
-    public void onAttach( Context context) {
-        super.onAttach(requireContext());
-        try {
-            someEventListener = (onSomeEventListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
-        }
-    }
 
 
 

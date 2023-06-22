@@ -10,15 +10,36 @@
         android:name="fragmentsUi.TasksFragment"
         android:label="fragment_tasks"
         tools:layout="@layout/fragment_tasks">
+        <argument
+            android:name="TaskBody"
+            app:argType="string"
+            />
         <action
             android:id="@+id/action_tasksFragment2_to_writingTaskFragment"
-            app:destination="@id/writingTaskFragment" />
+            app:destination="@id/writingTaskFragment"
+        >
+        </action>
+        <action
+            android:id="@+id/action_tasksFragment2_to_doneFragment3"
+            app:destination="@id/doneFragment3" />
+
+
     </fragment>
     <fragment
         android:id="@+id/doneFragment3"
         android:name="fragmentsUi.DoneFragment"
         android:label="fragment_done"
-        tools:layout="@layout/fragment_done" />
+        tools:layout="@layout/fragment_done" >
+        <argument
+            android:name="DoneTask"
+            app:argType="string"
+       />
+        <action
+            android:id="@+id/action_doneFragment3_to_tasksFragment2"
+            app:destination="@id/tasksFragment2"
+
+            />
+    </fragment>
     <fragment
         android:id="@+id/writingTaskFragment"
         android:name="com.example.doit.WritingTaskFragment"
@@ -26,7 +47,9 @@
         tools:layout="@layout/fragment_writing_task" >
         <action
             android:id="@+id/action_writingTaskFragment_to_tasksFragment2"
-            app:destination="@id/tasksFragment2" />
+            app:destination="@id/tasksFragment2"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

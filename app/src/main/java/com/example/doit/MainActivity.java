@@ -1,42 +1,25 @@
 package com.example.doit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-import androidx.room.Transaction;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import dataApp.TasksDataBase;
-import models.ToDoTasksModel;
-import recycleViews.RecycleViewAdaptar;
-import recycleViews.RecycleViewInterface;
-
-public class MainActivity extends AppCompatActivity implements WritingTaskFragment.onSomeEventListener {
-    Button saveBtn;
-    EditText edit1;
+public class MainActivity extends AppCompatActivity {
+    boolean found=false;
+    static boolean checked=false;
+    boolean first=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +29,31 @@ public class MainActivity extends AppCompatActivity implements WritingTaskFragme
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-    }
-
-    @Override
-    public void someEvent(String s) {
 
     }
+
+
+    public void setValue(boolean found) {
+        this.found = found;
+    }
+    public boolean getValue(){
+        return found;
+    }
+    public void setTime(boolean first) {
+        this.first = first;
+    }
+    public boolean getTime(){
+        return first;
+    }
+    public static void setChecked(boolean isChecked) {
+        checked = isChecked;
+    }
+    public static boolean getChecked(){
+        return checked;
+    }
+
+
+
 }
 
 

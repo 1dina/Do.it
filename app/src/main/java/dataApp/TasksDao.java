@@ -1,5 +1,6 @@
 package dataApp;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,6 +15,8 @@ public interface TasksDao {
     void deleteTask(ToDoTasksModel toDoTasksModel);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTask(ToDoTasksModel toDoTasksModel);
-    @Query("SELECT * From Tasks")
-    List<ToDoTasksModel> getAll();
+    @Query("SELECT * From Tasks Where isDone==0")
+    List<ToDoTasksModel> getTasks();
+    @Query("SELECT * From Tasks Where isDone==1")
+   List<ToDoTasksModel>getDoneTasks();
 }

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -17,8 +18,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.navigation.NavDirections;
+
+import com.example.doit.MainActivity;
 import com.example.doit.R;
 import com.example.doit.WritingTaskFragment;
 import com.example.doit.WritingTaskFragmentDirections;
@@ -32,7 +36,7 @@ import models.ToDoTasksModel;
 import recycleViews.RecycleViewAdaptar;
 import recycleViews.RecycleViewInterface;
 
-public class TasksFragment extends Fragment implements RecycleViewInterface, TasksDao,WritingTaskFragment.onSomeEventListener {
+public class TasksFragment extends Fragment implements RecycleViewInterface, TasksDao {
     ArrayList<ToDoTasksModel> myTasks =new ArrayList<>();
     RecycleViewAdaptar adaptar;
     RecyclerView recyclerView;
@@ -42,8 +46,13 @@ public class TasksFragment extends Fragment implements RecycleViewInterface, Tas
     BottomNavigationView BottomNav;
     NavDirections action;
     String TextToDo="";
-     WritingTaskFragment frag;
-     TextView tasks;
+    boolean found ;
+    boolean firstTime;
+    static int deletePosition=-1;
+    static int addPosition=-1;
+    static boolean isChecked=false;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,12 +67,24 @@ public class TasksFragment extends Fragment implements RecycleViewInterface, Tas
         super.onViewCreated(view, savedInstanceState);
      addingBtn=view.findViewById(R.id.add_fab);
      BottomNav=  getActivity().findViewById(R.id.bottom_nav);
+        firstTime=((MainActivity)getActivity()).getTime();
         setUpDB();
-       // setUpTasks();
-        myTasks.addAll(dataBase.tasksDao().getAll());
+        setUpTasks();
+            myTasks.clear();
+            myTasks.addAll(dataBase.tasksDao().getTasks());
+        if (deletePosition!=-1){
+            toDoTasksModel=myTasks.get(deletePosition);
+            myTasks.remove(deletePosition);
+            dataBase.tasksDao().deleteTask(toDoTasksModel);
+            deletePosition=-1;
+        }
         setUpRV();
+        ItemTouchHelper helper =new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
 
-     addingBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        addingBtn.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
              action = TasksFragmentDirections.actionTasksFragment2ToWritingTaskFragment();
@@ -87,7 +108,6 @@ public class TasksFragment extends Fragment implements RecycleViewInterface, Tas
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        //recyclerView.smoothScrollToPosition(myTasks.size()-1);
     }
 
     @Override
@@ -95,25 +115,43 @@ public class TasksFragment extends Fragment implements RecycleViewInterface, Tas
 
     }
 
-   /* public void setUpTasks() {
+    public void setUpTasks() {
+        found=((MainActivity)getActivity()).getValue();
+        if(found||addPosition!=-1){
             TextToDo = TasksFragmentArgs.fromBundle(getArguments()).getTaskBody();
             if (!(TextToDo.equals(""))) {
-                boolean isChecked = TasksFragmentArgs.fromBundle(getArguments()).getIsChecked();
-                toDoTasksModel = new ToDoTasksModel(isChecked, TextToDo);
+                if (addPosition!=-1) Navigation.findNavController(getView()).popBackStack();
+              toDoTasksModel = new ToDoTasksModel(false,TextToDo);
                 myTasks.add(toDoTasksModel);
                 dataBase.tasksDao().insertTask(toDoTasksModel);
                 myTasks.clear();
-                myTasks.addAll(dataBase.tasksDao().getAll());
-                //recyclerView.smoothScrollToPosition(myTasks.size()-1);
-                adaptar.notifyDataSetChanged();
+                myTasks.addAll(dataBase.tasksDao().getTasks());
+                ((MainActivity)getActivity()).setValue(false);
+                addPosition=-1;
 
-        }*/
+}
+
+        }}
+
+
+    ItemTouchHelper.SimpleCallback callback =new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
         @Override
-        public void someEvent(String s) {
-            android.app.Fragment frag1 = requireActivity().getFragmentManager().findFragmentById(R.id.tasksFragment2);
-            ((TextView)frag1.getView().findViewById(R.id.tasks)).setText(s);
-            Log.d("name",s);
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
         }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction){
+            Toast.makeText(getContext(), "item has been deleted!", Toast.LENGTH_SHORT).show();
+             toDoTasksModel= myTasks.remove(viewHolder.getAdapterPosition());
+            dataBase.tasksDao().deleteTask(toDoTasksModel);
+            myTasks.clear();
+            myTasks.addAll(dataBase.tasksDao().getTasks());
+            adaptar.notifyDataSetChanged();
+        }
+    };
+
+
 
 
     @Override
@@ -127,7 +165,19 @@ public class TasksFragment extends Fragment implements RecycleViewInterface, Tas
     }
 
     @Override
-    public List<ToDoTasksModel> getAll() {
+    public List<ToDoTasksModel> getTasks() {
         return null;
     }
+
+    @Override
+    public List<ToDoTasksModel> getDoneTasks() {
+        return null;
+    }
+    public static void setPos(int pos){deletePosition =pos;}
+    public static int getPos(){return deletePosition;}
+    public static void setAddPosition(int pos){addPosition =pos;}
+    public static int getAddPosition(){return addPosition;}
+    public static void setIsChecked(boolean check){isChecked =check;}
+    public static boolean getIsChecked(){return isChecked;}
+
 }
