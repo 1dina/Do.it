@@ -1,40 +1,37 @@
-package fragmentsUi;
+package com.example.doit.fragmentsUi;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.NavDirections;
 
 import com.example.doit.MainActivity;
 import com.example.doit.R;
-import com.example.doit.WritingTaskFragment;
-import com.example.doit.WritingTaskFragmentDirections;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
-import dataApp.TasksDao;
-import dataApp.TasksDataBase;
-import models.ToDoTasksModel;
-import recycleViews.RecycleViewAdaptar;
-import recycleViews.RecycleViewInterface;
+import com.example.doit.dataApp.TasksDao;
+import com.example.doit.dataApp.TasksDataBase;
+
+import fragmentsUi.TasksFragmentArgs;
+import fragmentsUi.TasksFragmentDirections;
+import com.example.doit.models.ToDoTasksModel;
+import com.example.doit.recycleViews.RecycleViewAdaptar;
+import com.example.doit.recycleViews.RecycleViewInterface;
 
 public class TasksFragment extends Fragment implements RecycleViewInterface, TasksDao {
     ArrayList<ToDoTasksModel> myTasks =new ArrayList<>();

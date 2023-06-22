@@ -7,7 +7,7 @@
     app:startDestination="@id/tasksFragment2">
     <fragment
         android:id="@+id/tasksFragment2"
-        android:name="fragmentsUi.TasksFragment"
+        android:name="com.example.doit.fragmentsUi.TasksFragment"
         android:label="fragment_tasks"
         tools:layout="@layout/fragment_tasks">
         <argument
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/doneFragment3"
-        android:name="fragmentsUi.DoneFragment"
+        android:name="com.example.doit.fragmentsUi.DoneFragment"
         android:label="fragment_done"
         tools:layout="@layout/fragment_done" >
         <argument

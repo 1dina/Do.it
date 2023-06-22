@@ -1,4 +1,4 @@
-package recycleViews;
+package com.example.doit.recycleViews;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ComponentActivity;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +17,12 @@ import com.example.doit.MainActivity;
 import com.example.doit.R;
 import java.util.ArrayList;
 
-import fragmentsUi.DoneFragment;
+import com.example.doit.fragmentsUi.DoneFragment;
 import fragmentsUi.DoneFragmentDirections;
-import fragmentsUi.TasksFragment;
+import com.example.doit.fragmentsUi.TasksFragment;
 import fragmentsUi.TasksFragmentArgs;
 import fragmentsUi.TasksFragmentDirections;
-import models.ToDoTasksModel;
+import com.example.doit.models.ToDoTasksModel;
 
 public class RecycleViewAdaptar extends  RecyclerView.Adapter<RecycleViewAdaptar.MyViewHolder> {
     ArrayList<ToDoTasksModel> MyTasksToDo;

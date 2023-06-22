@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/holo_gray_bright"
-    tools:context="fragmentsUi.TasksFragment">
+    tools:context=".fragmentsUi.TasksFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"

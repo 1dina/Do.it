@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import fragmentsUi.TasksFragmentDirections;
 
 
 public class WritingTaskFragment extends Fragment {

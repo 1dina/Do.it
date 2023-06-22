@@ -1,4 +1,4 @@
-package fragmentsUi;
+package com.example.doit.fragmentsUi;
 
 import android.os.Bundle;
 
@@ -15,22 +15,22 @@ import androidx.room.Room;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doit.MainActivity;
 import com.example.doit.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dataApp.TasksDao;
-import dataApp.TasksDataBase;
-import models.ToDoTasksModel;
-import recycleViews.RecycleViewAdaptar;
-import recycleViews.RecycleViewInterface;
+import com.example.doit.dataApp.TasksDao;
+import com.example.doit.dataApp.TasksDataBase;
+
+import fragmentsUi.DoneFragmentArgs;
+import com.example.doit.models.ToDoTasksModel;
+import com.example.doit.recycleViews.RecycleViewAdaptar;
+import com.example.doit.recycleViews.RecycleViewInterface;
 
 public class DoneFragment extends Fragment implements RecycleViewInterface, TasksDao {
     ArrayList<ToDoTasksModel> doneTasks = new ArrayList<>();

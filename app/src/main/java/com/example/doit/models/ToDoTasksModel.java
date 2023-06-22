@@ -1,4 +1,4 @@
-package models;
+package com.example.doit.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
